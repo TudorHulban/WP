@@ -16,7 +16,7 @@ https://wordpress.org/plugins/wp-maintenance-mode/
 
 ### Backup
 ```
-https://wordpress.org/plugins/wpvivid-backuprestore/#developers
+https://wordpress.org/plugins/wpvivid-backuprestore
 ```
 ### Reset DB
 ```
