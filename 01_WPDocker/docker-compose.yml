@@ -1,0 +1,78 @@
+version: "3.7"
+volumes:
+  mailbox:
+  sqlite:
+
+services:
+  smtp-sink:
+    build: smtp-sink/
+    container_name: smtp
+    ports:
+      - "2525:25"
+    volumes:
+      - mailbox:/home/smtp/Maildir/
+    networks:
+      mail:
+       ipv4_address: 172.30.0.2
+
+  courier-imap:
+    build: courier-imap/
+    container_name: imap
+    ports:
+      - "143:143"
+    volumes:
+      - mailbox:/home/smtp/Maildir/
+    networks:
+      mail:
+       ipv4_address: 172.30.0.3
+
+  webmail:
+    build: webmail/
+    container_name: webmail
+    environment:
+      - IMAP_HOSTNAME=courier-imap
+      - SMTP_HOSTNAME=smtp-sink
+    ports:
+      - "8008:80"
+    volumes:
+      - sqlite:/var/lib/dbconfig-common/sqlite3/roundcube
+    networks:
+      mail:
+       ipv4_address: 172.30.0.4
+
+  db:
+    image: mariadb:latest
+    container_name: db
+    environment:
+     MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    networks:
+      mail:
+       ipv4_address: 172.30.0.5
+
+  wordpress:
+        image: wordpress
+        container_name: wp
+        links:
+         - db
+        environment:
+          WORDPRESS_DB_HOST: db:3306
+          WORDPRESS_DB_PASSWORD: password
+        ports:
+         - 8080:80
+        volumes:
+         - type: bind
+           source: ./docker-uploads.ini
+           target: /usr/local/etc/php/conf.d/docker-uploads.ini
+        networks:
+          mail:
+            ipv4_address: 172.30.0.7
+
+networks:
+  mail:
+    name: mail 
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.30.0.0/24"
