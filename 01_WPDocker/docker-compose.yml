@@ -54,6 +54,8 @@ services:
   wordpress:
         image: wordpress
         container_name: wp
+        volumes:
+        - /home/tudi/ram/wpcontent:/var/www/html
         links:
          - db
         environment:
