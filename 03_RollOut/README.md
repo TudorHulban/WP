@@ -84,31 +84,6 @@ Install Starter template, check library and pick Elementor templates.
 https://wordpress.org/plugins/astra-sites/
 ```
 
-## Plugins Maintenance
-### Image Optimization
-```
-https://wordpress.org/plugins/ewww-image-optimizer/
-```
-### File Manager
-Only for non production environments.
-```
-https://wordpress.org/plugins/file-manager-advanced/
-```
-
-### WP Maintenance Mode
-```
-https://wordpress.org/plugins/wp-maintenance-mode/
-```
-
-### BackWPup
-```
-https://wordpress.org/plugins/backwpup/
-```
-### Reset DB
-```
-https://wordpress.org/plugins/advanced-wp-reset/
-```
-
 ## Plugins WooCommerce
 ### Direct Checkout
 Added to cart alert - Yes.
