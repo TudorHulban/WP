@@ -45,4 +45,5 @@ https://wordpress.org/plugins/advanced-woo-labels/
 ```
 https://www.adicoscai.com/cum-arati-produse-upsells-in-thank-you-page/
 https://www.welaunch.io/en/2020/01/customize-woocommerce-my-account-page/
+https://wpbeaches.com/change-return-to-store-text-button-in-woocommerce/
 ```
