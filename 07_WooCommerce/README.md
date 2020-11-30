@@ -40,6 +40,10 @@ https://wordpress.org/plugins/elex-minimum-order-amount-for-woocommerce/
 ```
 https://wordpress.org/plugins/advanced-woo-labels/
 ```
+### Email Designed
+```
+https://www.kadencewp.com/product/woocommerce-email-designer/
+```
 ### Thank you for your Order
 ```
 https://wordpress.org/plugins/woo-thank-you-page-customizer/
