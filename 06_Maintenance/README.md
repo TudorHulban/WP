@@ -1,4 +1,8 @@
 ## Plugins Maintenance
+### Disable Autosave
+```
+https://www.minutesguide.com/disable-wordpress-autosave/
+```
 ### Image Optimization
 ```
 https://wordpress.org/plugins/ewww-image-optimizer/
