@@ -7,6 +7,9 @@ b. decrease number of products per row by one.
 ### Change breadcumbs to icon
 Kadence -> General -> Breadcumbs
 
+### Hide `Downloads` section in `My Account`
+WooCommerce -> Advanced -> Account endpoints -> empty the `Downloads` field.
+
 ### Disable footer on Cart Page
 a. Edit Cart Page <br/>
 b. Go to More Tools and Options and set Plugins to Page Settings. <br/>
