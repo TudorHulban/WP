@@ -7,7 +7,7 @@ services:
     volumes:
       - ${NGINX_CONF_DIR}:/etc/nginx/conf.d
       - ${NGINX_LOG_DIR}:/var/log/nginx
-      - ${WORDPRESS_DATA_DIR}:/var/www/html
+      - wp-data:/var/www/html
       - ${FASTCGI_CACHE_DIR}:/var/run/nginx
     ports:
       - "8080:80"
@@ -23,7 +23,7 @@ services:
     container_name: WP
     image: wordpress:php7.4-fpm-alpine
     volumes:
-      - ${WORDPRESS_DATA_DIR}:/var/www/html
+      - wp-data:/var/www/html
       - ${FASTCGI_CACHE_DIR}:/var/www/html/cache
       - ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
@@ -39,6 +39,28 @@ services:
     networks:
        wp-sandbox:
         ipv4_address: 172.18.1.2
+
+
+  wordpress-cli:
+    depends_on:
+      - db
+      - wordpress
+    image: wordpress:cli
+    # vstm: This is required to run wordpress-cli with the same
+    # user-id as wordpress. This way there are no permission problems
+    # when running the cli
+    user: xfs
+    # vstm: The sleep 10 is required so that the command is run after
+    # mysql is initialized. Depending on your machine this might take
+    # longer or it can go faster.
+    command: >
+      /bin/sh -c '
+      sleep 10;
+      wp core install --path="/var/www/html" --url="http://localhost:8080" --title="Sandbox" --admin_user=tudi --admin_password=tudi --admin_email=tudi@x.com
+      '
+    # vstm: add shared volume
+    volumes:
+      - wp-data:/var/www/html
 
 
   db:
@@ -66,6 +88,9 @@ services:
     networks:
        wp-sandbox:
         ipv4_address: 172.18.1.4
+
+volumes:
+  wp-data:
 
 
 networks:
