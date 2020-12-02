@@ -3,6 +3,10 @@
 ```
 https://www.minutesguide.com/disable-wordpress-autosave/
 ```
+### Emails / SMTP
+```
+https://blog.mailtrap.io/wordpress-smtp-settings/
+```
 ### Plugin Image Optimization
 ```
 https://wordpress.org/plugins/ewww-image-optimizer/
