@@ -45,6 +45,7 @@ https://wordpress.org/plugins/advanced-woo-labels/
 https://www.kadencewp.com/product/woocommerce-email-designer/
 ```
 ### Thank you for your Order
+If used with sequential order numbering the command number is not corectly taken. (Could be replaced with other words)
 ```
 https://wordpress.org/plugins/woo-thank-you-page-customizer/
 ```
