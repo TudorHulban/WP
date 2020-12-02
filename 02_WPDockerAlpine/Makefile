@@ -2,6 +2,6 @@
 compose-up: 
 	@docker-compose up --force-recreate 
 
-.PHONY: compose-check
-compose-check: 
+.PHONY: check
+check: 
 	@docker-compose config
