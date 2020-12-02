@@ -36,7 +36,6 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-    command: wp plugin list
     networks:
        wp-sandbox:
         ipv4_address: 172.18.1.2
