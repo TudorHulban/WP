@@ -1,4 +1,5 @@
 ### Show last update instead of published date for blog entries
+Kadence theme already has the functionality in Customizer -> Single Blog Post -> Meta.
 Additional CSS:
 ```css
 span time.updated {
