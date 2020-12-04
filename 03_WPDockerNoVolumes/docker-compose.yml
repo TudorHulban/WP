@@ -6,6 +6,7 @@ services:
     image: nginx:stable-alpine
     volumes:
       - ${NGINX_CONF_DIR}:/etc/nginx/conf.d
+      - wp-data:/var/www/html
     ports:
       - "8080:80"
     depends_on:
@@ -21,6 +22,7 @@ services:
     image: wordpress:php7.4-fpm-alpine
     volumes:
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - wp-data:/var/www/html
     environment:
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
       - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX}
@@ -58,6 +60,9 @@ services:
     networks:
        wp-sandbox:
         ipv4_address: 172.18.1.4
+
+volumes:
+  wp-data:
 
 networks:
   wp-sandbox:
