@@ -39,7 +39,9 @@ services:
 
   db:
     container_name: DB
-    image: mariadb:latest
+    image: local-mariadb
+    # image: mariadb:latest
+    build: mariadb/
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
