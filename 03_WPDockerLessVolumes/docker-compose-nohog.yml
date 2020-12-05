@@ -1,0 +1,64 @@
+version: '3.7'
+
+services:
+  nginx:
+    container_name: HTTP
+    image: nginx:stable-alpine
+    volumes:
+      - ${NGINX_CONF_DIR}:/etc/nginx/conf.d
+      - wp-data:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - wordpress
+    restart: unless-stopped
+    networks:
+       wp-sandbox:
+        ipv4_address: 172.18.1.1
+
+
+  wordpress:
+    container_name: WP
+    image: wordpress:php7.4-fpm-alpine
+    volumes:
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - wp-data:/var/www/html
+    environment:
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX}
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+       wp-sandbox:
+        ipv4_address: 172.18.1.2
+
+
+  db:
+    container_name: DB
+    image: local-mariadb
+    # image: mariadb:latest
+    build: mariadb/
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    restart: unless-stopped
+    networks:
+       wp-sandbox:
+        ipv4_address: 172.18.1.3
+
+volumes:
+  wp-data:
+
+networks:
+  wp-sandbox:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.1.0/16
