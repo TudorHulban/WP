@@ -19,7 +19,9 @@ services:
 
   wordpress:
     container_name: WP
-    image: wordpress:php7.4-fpm-alpine
+    #image: wordpress:php7.4-fpm-alpine
+    image: local-wp
+    build: wpress/
     volumes:
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - wp-data:/var/www/html
