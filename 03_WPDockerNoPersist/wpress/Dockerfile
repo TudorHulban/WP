@@ -88,14 +88,9 @@ RUN set -ex; \
 		mkdir "wp-content/$dir"; \
 	done; \
 	chown -R www-data:www-data wp-content; \
-	chmod -R 777 wp-content; \
-	rm -rf /var/www/html/wp-content/plugins/akismet/; \
-	rm /var/www/html/wp-content/plugins/hello.php; \
-	rm -rf /var/www/html/wp-content/themes/twentyseventeen; \
-	rm -rf /var/www/html/wp-content/themes/twentynineteen; \
-	rm -rf /var/www/html/wp-content/themes/twentytwenty;
+	chmod -R 777 wp-content; 	
 
-# VOLUME /var/www/html
+VOLUME /var/www/html
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

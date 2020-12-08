@@ -69,6 +69,7 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 			# avoid "tar: .: Cannot utime: Operation not permitted" and "tar: .: Cannot change mode to rwxr-xr-x: Operation not permitted"
 			targetTarArgs+=( --no-overwrite-dir )
 		fi
+
 		# loop over "pluggable" content in the source, and if it already exists in the destination, skip it
 		# https://github.com/docker-library/wordpress/issues/506 ("wp-content" persisted, "akismet" updated, WordPress container restarted/recreated, "akismet" downgraded)
 		for contentDir in /usr/src/wordpress/wp-content/*/*/; do
@@ -80,6 +81,14 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 				sourceTarArgs+=( --exclude "./$contentPath" )
 			fi
 		done
+
+		# clean up WPress install
+		rm -rf /var/www/html/wp-content/plugins/akismet/; 
+		rm -rf /var/www/html/wp-content/themes/twentyseventeen;
+		rm -rf /var/www/html/wp-content/themes/twentynineteen; 
+		rm -rf /var/www/html/wp-content/themes/twentytwenty;
+		# rm /var/www/html/wp-content/plugins/hello.php;
+
 		tar "${sourceTarArgs[@]}" . | tar "${targetTarArgs[@]}"
 		echo >&2 "Complete! WordPress has been successfully copied to $PWD"
 		if [ ! -e .htaccess ]; then
