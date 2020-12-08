@@ -88,9 +88,10 @@ RUN set -ex; \
 		mkdir "wp-content/$dir"; \
 	done; \
 	chown -R www-data:www-data wp-content; \
-	chmod -R 777 wp-content
+	chmod -R 777 wp-content; \
+	rm -rf /var/www/html/wp-content/akismet;
 
-VOLUME /var/www/html
+# VOLUME /var/www/html
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
