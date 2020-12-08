@@ -13,12 +13,14 @@ file_env() {
 		echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
 		exit 1
 	fi
+
 	local val="$def"
 	if [ "${!var:-}" ]; then
 		val="${!var}"
 	elif [ "${!fileVar:-}" ]; then
 		val="$(< "${!fileVar}")"
 	fi
+
 	export "$var"="$val"
 	unset "$fileVar"
 }
@@ -55,6 +57,7 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 		if [ -n "$(find -mindepth 1 -maxdepth 1 -not -name wp-content)" ]; then
 			echo >&2 "WARNING: $PWD is not empty! (copying anyhow)"
 		fi
+
 		sourceTarArgs=(
 			--create
 			--file -
@@ -81,13 +84,6 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 				sourceTarArgs+=( --exclude "./$contentPath" )
 			fi
 		done
-
-		# clean up WPress install
-		rm -rf /var/www/html/wp-content/plugins/akismet/; 
-		rm -rf /var/www/html/wp-content/themes/twentyseventeen;
-		rm -rf /var/www/html/wp-content/themes/twentynineteen; 
-		rm -rf /var/www/html/wp-content/themes/twentytwenty;
-		# rm /var/www/html/wp-content/plugins/hello.php;
 
 		tar "${sourceTarArgs[@]}" . | tar "${targetTarArgs[@]}"
 		echo >&2 "Complete! WordPress has been successfully copied to $PWD"

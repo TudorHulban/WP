@@ -83,6 +83,12 @@ RUN set -ex; \
 # pre-create wp-content (and single-level children) for folks who want to bind-mount themes, etc so permissions are pre-created properly instead of root:root
 # wp-content/cache: https://github.com/docker-library/wordpress/issues/534#issuecomment-705733507
 	mkdir wp-content; \
+# clean updocker imag	
+rm -rf /usr/src/wordpress/wp-content/plugins/akismet/; \
+rm -rf /usr/src/wordpress/wp-content/themes/twentyseventeen; \
+rm -rf /usr/src/wordpress/wp-content/themes/twentynineteen; \
+rm -rf /usr/src/wordpress/wp-content/themes/twentytwenty; \
+# rm /var/www/html/wp-content/plugins/hello.php;
 	for dir in /usr/src/wordpress/wp-content/*/ cache; do \
 		dir="$(basename "${dir%/}")"; \
 		mkdir "wp-content/$dir"; \
@@ -90,9 +96,9 @@ RUN set -ex; \
 	chown -R www-data:www-data wp-content; \
 	chmod -R 777 wp-content; 	
 
-VOLUME /var/www/html
+# VOLUME /var/www/html
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+# ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["php-fpm"]
