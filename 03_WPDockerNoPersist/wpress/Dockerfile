@@ -85,9 +85,9 @@ RUN set -ex; \
 	mkdir wp-content; \
 # clean updocker imag	
 rm -rf /usr/src/wordpress/wp-content/plugins/akismet/; \
-rm -rf /usr/src/wordpress/wp-content/themes/twentyseventeen; \
-rm -rf /usr/src/wordpress/wp-content/themes/twentynineteen; \
-rm -rf /usr/src/wordpress/wp-content/themes/twentytwenty; \
+# rm -rf /usr/src/wordpress/wp-content/themes/twentyseventeen; \
+# rm -rf /usr/src/wordpress/wp-content/themes/twentynineteen; \
+# rm -rf /usr/src/wordpress/wp-content/themes/twentytwenty; \
 # rm /var/www/html/wp-content/plugins/hello.php;
 	for dir in /usr/src/wordpress/wp-content/*/ cache; do \
 		dir="$(basename "${dir%/}")"; \
@@ -96,9 +96,9 @@ rm -rf /usr/src/wordpress/wp-content/themes/twentytwenty; \
 	chown -R www-data:www-data wp-content; \
 	chmod -R 777 wp-content; 	
 
-# VOLUME /var/www/html
+VOLUME /var/www/html
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
-# ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["php-fpm"]
