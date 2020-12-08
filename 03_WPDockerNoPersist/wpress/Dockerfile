@@ -89,7 +89,7 @@ RUN set -ex; \
 	done; \
 	chown -R www-data:www-data wp-content; \
 	chmod -R 777 wp-content; \
-	rm -rf /var/www/html/wp-content/akismet;
+	rm -rf rm -rf /var/www/html/wp-content/plugins/akismet/;
 
 # VOLUME /var/www/html
 
