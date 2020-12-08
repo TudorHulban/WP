@@ -85,10 +85,10 @@ RUN set -ex; \
 	mkdir wp-content; \
 # clean updocker imag	
 rm -rf /usr/src/wordpress/wp-content/plugins/akismet/; \
-# rm -rf /usr/src/wordpress/wp-content/themes/twentyseventeen; \
-# rm -rf /usr/src/wordpress/wp-content/themes/twentynineteen; \
-# rm -rf /usr/src/wordpress/wp-content/themes/twentytwenty; \
-# rm /var/www/html/wp-content/plugins/hello.php;
+rm -rf /usr/src/wordpress/wp-content/themes/twentyseventeen; \
+rm -rf /usr/src/wordpress/wp-content/themes/twentynineteen; \
+rm -rf /usr/src/wordpress/wp-content/themes/twentytwenty; \
+rm /usr/src/wordpress/wp-content/plugins/hello.php; \
 	for dir in /usr/src/wordpress/wp-content/*/ cache; do \
 		dir="$(basename "${dir%/}")"; \
 		mkdir "wp-content/$dir"; \
