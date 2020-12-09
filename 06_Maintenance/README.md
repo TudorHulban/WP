@@ -7,6 +7,10 @@ https://www.minutesguide.com/disable-wordpress-autosave/
 ```
 https://blog.mailtrap.io/wordpress-smtp-settings/
 ```
+### Plugin SSL
+```
+https://wordpress.org/plugins/really-simple-ssl/
+```
 ### Plugin Image Optimization
 ```
 https://wordpress.org/plugins/ewww-image-optimizer/
